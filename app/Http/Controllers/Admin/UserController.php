@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $result['success'] = true;
-        $users = User::all();
+        $users = User::all()->where('role', '=', 'user');
         $userCount = User::all()->count();
         $result['users'] = $users;
         $result['userCount'] = $userCount;

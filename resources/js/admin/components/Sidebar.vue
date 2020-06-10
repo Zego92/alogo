@@ -32,15 +32,21 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link :to="{name: 'Cars'}" class="nav-link">
+                                <i class="nav-icon fas fa-car"></i>
+                                <p>Автопроизводители</p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link :to="{name: 'Category'}" class="nav-link">
                                 <i class="nav-icon fas fa-grip-horizontal"></i>
                                 <p>Категории</p>
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link :to="{name: 'Products'}" class="nav-link">
+                            <router-link :to="{name: 'Product'}" class="nav-link">
                                 <i class="nav-icon fas fa-clipboard-list"></i>
-                                <p>Продукты</p>
+                                <p>Товары</p>
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -69,8 +75,20 @@
                             </router-link>
                         </li>
 
+                        <li class="nav-item">
+                            <router-link :to="{name: 'Feedback'}" class="nav-link">
+                                <i class="nav-icon fas fa-rss"></i>
+                                <p>Обратная связь</p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link :to="{name: 'Subscribers'}" class="nav-link">
+                                <i class="nav-icon fas fa-bell"></i>
+                                <p>Подписчики</p>
+                            </router-link>
+                        </li>
                         <li class="nav-item" >
-                            <a  class="nav-link" style="cursor:pointer;">
+                            <a @click.prevent="onClickLogout" class="nav-link" style="cursor:pointer;">
                                 <i class="nav-icon fas fa-power-off text-danger"></i>
                                 <p>Выход</p>
                             </a>
@@ -90,7 +108,15 @@
         },
         components: {},
         computed: {},
-        methods: {},
+        methods: {
+            onClickLogout()
+            {
+                this.$store.commit('auth/setIsAuth', false)
+                this.$store.commit('auth/setUser', '')
+                localStorage.removeItem('userId')
+                this.$router.push({name: 'Login'})
+            }
+        },
         mounted() {
         }
     }

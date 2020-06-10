@@ -80,7 +80,15 @@
                     this.$store.commit('auth/logLoginErrors', '')
                 })
                 .catch((error) => {
-
+                    Vue.swal({
+                        toast:true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        icon: 'error',
+                        title: error.response.data.err
+                    })
                 })
             }
         },

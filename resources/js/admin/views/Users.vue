@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Loader v-if="loader"/>
         <div class="content-wrapper" style="min-height: 855px;">
             <div class="content-header">
                 <div class="container-fluid">
@@ -118,8 +119,9 @@
 </template>
 
 <script>
-    import {mapActions, mapGetters} from 'vuex'
+    import {mapActions, mapGetters, mapState} from 'vuex'
     import Vue from 'vue'
+    import Loader from "../components/Loader";
     export default {
         name: "Users",
         data() {
@@ -134,8 +136,9 @@
                 }
             }
         },
-        components: {},
+        components: {Loader},
         computed: {
+            ...mapState('users', ['loader']),
             ...mapGetters('users',
                 [
                     'users',

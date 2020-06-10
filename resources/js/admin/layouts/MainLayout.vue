@@ -1,5 +1,6 @@
 <template>
     <div>
+<!--        <Loader/>-->
         <Header/>
         <Sidebar/>
         <router-view/>
@@ -9,6 +10,7 @@
 <script>
     import Header from "../components/Header";
     import Sidebar from "../components/Sidebar";
+    import Loader from "../components/Loader";
     export default {
         name: "MainLayout",
         data() {
@@ -17,6 +19,7 @@
             }
         },
         components: {
+            Loader,
             Header,
             Sidebar
         },

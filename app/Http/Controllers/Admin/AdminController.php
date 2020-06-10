@@ -31,7 +31,7 @@ class AdminController extends Controller
         if (!isset($user))
         {
             $result['success'] = false;
-            $result['err'] = 'Пользователь с такими данными не существует';
+            $result['err'] = 'Недостаточно прав для доступа';
             return response()->json($result, 422);
         }
         if (isset($user))
@@ -39,6 +39,7 @@ class AdminController extends Controller
             if ($user->role === 'admin')
             {
                 $result['success'] = true;
+                $result['user'] = $user;
                 $result['message'] = 'Добро пожаловать в Админ панель';
                 return response()->json($result, 200);
             }

@@ -16,12 +16,14 @@ function initialState () {
         email: [],
         phone: []
     }
+    const loader = false;
     return {
         users,
         userCount,
         addUserErrors,
         user,
-        updateUserErrors
+        updateUserErrors,
+        loader
     }
 }
 
@@ -70,13 +72,16 @@ const getters = {
     {
         return state.updateUserErrors.phone
     },
-
-
+    loader(state)
+    {
+        return state.loader;
+    },
 };
 
 const actions = {
     async getAllUsers(ctx, data)
     {
+        ctx.commit('setIsLoad', true)
         return new Promise((resolve, reject) => {
             axios({
                 url: '/users',
@@ -87,15 +92,18 @@ const actions = {
                     ctx.commit('setUsers', resp.data.users)
                     ctx.commit('setUserCount', resp.data.userCount)
                     resolve(resp)
+                    ctx.commit('setIsLoad', false)
                 })
                 .catch((error) => {
                     reject(error)
+                    ctx.commit('setIsLoad', false)
                 })
         })
     },
 
     async addUser(ctx, data)
     {
+        ctx.commit('setIsLoad', true)
         return new Promise((resolve, reject) => {
             axios({
                 url: '/users',
@@ -104,16 +112,19 @@ const actions = {
             })
                 .then((resp) => {
                     resolve(resp)
+                    ctx.commit('setIsLoad', false)
                 })
                 .catch((error) => {
                     ctx.commit('logAddUserErrors', error.response.data.error)
                     reject(error)
+                    ctx.commit('setIsLoad', false)
                 })
         })
     },
 
     async deleteUser(ctx, id)
     {
+        ctx.commit('setIsLoad', true)
         return new Promise((resolve, reject) => {
             axios({
                 url: '/users/' + id,
@@ -121,15 +132,18 @@ const actions = {
             })
                 .then((resp) => {
                     resolve(resp)
+                    ctx.commit('setIsLoad', false)
                 })
                 .catch((error) => {
                     reject(error)
+                    ctx.commit('setIsLoad', false)
                 })
         })
     },
 
     async getUser(ctx, id)
     {
+        ctx.commit('setIsLoad', true)
         return new Promise((resolve, reject) => {
             axios({
                 url: '/users/' + id,
@@ -138,14 +152,17 @@ const actions = {
                 .then((resp) => {
                     ctx.commit('setUser', resp.data.user)
                     resolve(resp)
+                    ctx.commit('setIsLoad', false)
                 })
                 .catch((error) => {
                     reject(error)
+                    ctx.commit('setIsLoad', false)
                 })
         })
     },
     async updateUser(ctx, {id, data})
     {
+        ctx.commit('setIsLoad', true)
         return new Promise((resolve, reject) => {
             axios({
                 url: '/users/' + id,
@@ -154,10 +171,12 @@ const actions = {
             })
                 .then((resp) => {
                     resolve(resp)
+                    ctx.commit('setIsLoad', false)
                 })
                 .catch((error) => {
                     ctx.commit('logUpdateUserErrors', error.response.data.error)
                     reject(error)
+                    ctx.commit('setIsLoad', false)
                 })
         })
     }
@@ -184,7 +203,11 @@ const mutations = {
     logUpdateUserErrors(state, updateUserErrors)
     {
         state.updateUserErrors = updateUserErrors
-    }
+    },
+    setIsLoad(state, loader)
+    {
+        state.loader = loader
+    },
 };
 
 export default {

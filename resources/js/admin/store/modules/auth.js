@@ -2,6 +2,7 @@ import axios from "axios";
 
 function initialState () {
     const isAuth = false;
+    const user = '';
     const loginErrors = {
         phone: [],
         password: []
@@ -9,7 +10,8 @@ function initialState () {
 
     return {
         isAuth,
-        loginErrors
+        loginErrors,
+        user
     }
 }
 
@@ -21,6 +23,10 @@ const getters = {
     loginErrorsPassword(state)
     {
         return state.loginErrors.password
+    },
+    user(state)
+    {
+        return state.user
     }
 };
 
@@ -35,6 +41,7 @@ const actions = {
             })
                 .then((resp) => {
                     ctx.commit('setIsAuth', true)
+                    ctx.commit('setUser', resp.data.user)
                     resolve(resp)
                 })
                 .catch((error) => {
@@ -59,6 +66,11 @@ const mutations = {
     logLoginErrors(state, loginErrors)
     {
         state.loginErrors = loginErrors;
+    },
+    setUser(state, user)
+    {
+        state.user = user
+        localStorage.setItem('userId', user.id)
     }
 };
 

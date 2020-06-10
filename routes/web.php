@@ -18,11 +18,34 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 //Admin
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.view');
 Route::post('/admin-login', 'Admin\AdminController@login')->name('admin.login');
-Route::resource('users', 'Admin\UserController');
+Route::resource('/users', 'Admin\UserController');
+Route::resource('/category', 'Admin\CategoryController');
+Route::resource('/cars', 'Admin\CarController');
+Route::resource('/products', 'Admin\ProductController');
+Route::resource('/product-gallery', 'Admin\ProductGalleryController');
+Route::resource('/banners', 'Admin\BannerController');
+Route::resource('/comments', 'Admin\CommentController');
+Route::resource('/subscribers', 'Admin\SubscriberController');
+Route::resource('/company', 'Admin\CompanyController');
+Route::resource('/feedback', 'Admin\FeedbackController');
+Route::resource('/orders', 'Admin\OrderController');
+Route::resource('/admin-order-product', 'Admin\OrderProductController');
+Route::post('/product-update-status', 'Admin\ProductController@updateProductStatus');
+Route::post('/orders-update-status', 'Admin\OrderController@updateOrderStatus');
+
+//Client
+Route::resource('/client-banners', 'BannerController');
+Route::resource('/client-subscribers', 'SubscriberController');
+Route::resource('/client-cars', 'CarController');
+Route::resource('/client-feedback', 'FeedbackController');
+Route::get('/get-random-cars', 'MainController@getRandomCars');
+Route::post('/client-login', 'AuthController@login');
+Route::post('/client-register', 'AuthController@register');
+
