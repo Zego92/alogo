@@ -3120,8 +3120,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -3230,17 +3228,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3444,17 +3431,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3791,7 +3767,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -4587,17 +4562,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -4778,17 +4742,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5170,17 +5123,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5244,17 +5186,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -67800,11 +67731,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-12" }, [
       _c("div", { staticClass: "card card-primary shadow-lg" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("h3", { staticClass: "card-title" }, [
-            _vm._v("Добавленные баннеры")
-          ])
-        ])
+        _c("div", { staticClass: "card-header" })
       ])
     ])
   },
@@ -67880,7 +67807,7 @@ var render = function() {
                 [
                   _c("div", { staticClass: "col-8" }, [
                     _c("div", { staticClass: "card card-primary shadow-lg" }, [
-                      _vm._m(1),
+                      _c("div", { staticClass: "card-header" }),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -67890,7 +67817,7 @@ var render = function() {
                             "table",
                             { staticClass: "table table-head-fixed" },
                             [
-                              _vm._m(2),
+                              _vm._m(1),
                               _vm._v(" "),
                               _c(
                                 "tbody",
@@ -67968,7 +67895,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
                       _c("form", { attrs: { role: "form" } }, [
@@ -68200,16 +68127,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("Добавленные автопроизводители")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("ID")]),
@@ -68294,7 +68211,7 @@ var render = function() {
                 [
                   _c("div", { staticClass: "col-8" }, [
                     _c("div", { staticClass: "card card-primary shadow-lg" }, [
-                      _vm._m(1),
+                      _c("div", { staticClass: "card-header" }),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -68304,7 +68221,7 @@ var render = function() {
                             "table",
                             { staticClass: "table table-head-fixed" },
                             [
-                              _vm._m(2),
+                              _vm._m(1),
                               _vm._v(" "),
                               _c(
                                 "tbody",
@@ -68402,7 +68319,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
                       _c(
@@ -68782,14 +68699,6 @@ var staticRenderFns = [
           ])
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Добавленные категории")])
     ])
   },
   function() {
@@ -70632,7 +70541,7 @@ var render = function() {
                 [
                   _c("div", { staticClass: "col-10" }, [
                     _c("div", { staticClass: "card card-primary shadow-lg" }, [
-                      _vm._m(1),
+                      _c("div", { staticClass: "card-header" }),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -70642,7 +70551,7 @@ var render = function() {
                             "table",
                             { staticClass: "table table-head-fixed" },
                             [
-                              _vm._m(2),
+                              _vm._m(1),
                               _vm._v(" "),
                               _c(
                                 "tbody",
@@ -70913,7 +70822,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
                       _c("div", { staticClass: "container-fluid" }, [
@@ -71068,7 +70977,7 @@ var render = function() {
                                   "table table-bordered table-striped text-center"
                               },
                               [
-                                _vm._m(4),
+                                _vm._m(3),
                                 _vm._v(" "),
                                 _c(
                                   "tbody",
@@ -71359,14 +71268,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Полученные заказы")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("ID")]),
@@ -71463,14 +71364,14 @@ var render = function() {
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "card card-primary shadow-lg" }, [
-                    _vm._m(1),
+                    _c("div", { staticClass: "card-header" }),
                     _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "card-body table-responsive p-0" },
                       [
                         _c("table", { staticClass: "table table-head-fixed" }, [
-                          _vm._m(2),
+                          _vm._m(1),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -71789,7 +71690,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
                       _c(
@@ -72424,14 +72325,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Доступные товары")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("ID")]),
@@ -72518,14 +72411,14 @@ var render = function() {
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "card shadow-lg card-primary" }, [
-                    _vm._m(1),
+                    _c("div", { staticClass: "card-header" }),
                     _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "card-body table-responsive p-0" },
                       [
                         _c("table", { staticClass: "table table-head-fixed" }, [
-                          _vm._m(2),
+                          _vm._m(1),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -72598,14 +72491,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Подписчики")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("ID")]),
@@ -72657,14 +72542,14 @@ var render = function() {
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "card shadow-lg card-primary" }, [
-                    _vm._m(1),
+                    _c("div", { staticClass: "card-header" }),
                     _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "card-body table-responsive p-0" },
                       [
                         _c("table", { staticClass: "table table-head-fixed" }, [
-                          _vm._m(2),
+                          _vm._m(1),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -72766,7 +72651,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
                       _c("form", { attrs: { role: "form" } }, [
@@ -73137,16 +73022,6 @@ var staticRenderFns = [
             )
           ])
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("Зарегистрированные пользователи")
       ])
     ])
   },

@@ -20,8 +20,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card card-primary">
-                                <div class="card-header">
-                                </div>
+                                <div class="card-header"></div>
                                 <div class="card-body" v-for="company in companies" :key="company.id">
                                     <p align="justify" v-html="company.description">{{company.description}}</p>
                                     <ul class="list-group list-group-flush">
