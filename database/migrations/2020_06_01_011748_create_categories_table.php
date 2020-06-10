@@ -20,7 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name')->unique()->index();
             $table->string('keywords')->index();
             $table->string('slug')->unique();
-            $table->text('image')->default('no_image.jpg');
+            $table->text('image')->nullable();
             $table->timestamps();
             $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
         });

@@ -18,7 +18,7 @@ class CreateCarsTable extends Migration
             $table->string('name')->index()->unique();
             $table->string('keywords');
             $table->string('slug')->unique();
-            $table->text('image')->default('no_image.jpg');
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }
