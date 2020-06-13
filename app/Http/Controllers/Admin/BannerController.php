@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Banner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -57,6 +58,7 @@ class BannerController extends Controller
     {
         $result['success'] = false;
         $banner = Banner::find($id);
+        File::delete(public_path() . '/uploads/image/banner/' . $banner->image);
         $banner->delete();
         if ($banner->delete())
         {

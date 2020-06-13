@@ -200,7 +200,9 @@
                 this.formData = {
                     name: '',
                     keywords: '',
-                    parentId: ''
+                    parentId: '',
+                    carId: '',
+                    image: ''
                 }
             },
             fileChangeEvent(e)

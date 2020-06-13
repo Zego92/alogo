@@ -199,4 +199,8 @@
         border-radius: 0 0.25rem 0.25rem 0;
         display: none !important;
     }
+    img.card-img-top{
+        height: 172px;
+        width: 100% !important;
+    }
 </style>

@@ -45,7 +45,13 @@ Route::resource('/client-banners', 'BannerController');
 Route::resource('/client-subscribers', 'SubscriberController');
 Route::resource('/client-cars', 'CarController');
 Route::resource('/client-feedback', 'FeedbackController');
+Route::resource('/client-category', 'CategoryController');
+Route::resource('/client-products', 'ProductController');
 Route::get('/get-random-cars', 'MainController@getRandomCars');
+Route::get('/get-random-category', 'MainController@getRandomCategory');
+Route::get('/get-random-products', 'MainController@getRandomProducts');
 Route::post('/client-login', 'AuthController@login');
 Route::post('/client-register', 'AuthController@register');
+Route::post('/client-search-vin', 'SearchController@searchByVin');
+Route::post('/client-search-product', 'SearchController@searchByProduct');
 

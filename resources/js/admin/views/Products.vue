@@ -88,7 +88,7 @@
                             <form role="form" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="productCarCategory">Автопроизводитель</label>
-                                    <select @change="onChangeGetCategory" v-model="carId" class="custom-select" id="productCarCategory" >
+                                    <select @change="onChangeGetCategory" v-model="carData.carId" class="custom-select" id="productCarCategory" >
                                         <option v-for="car in cars" :key="car.id" :value="car.id" >{{car.name}}</option>
                                     </select>
                                 </div>
@@ -195,7 +195,10 @@
                     status: '',
                     productId: ''
                 },
-                carId: ''
+                carData: {
+                    carId: ''
+                },
+
 
 
             }
@@ -263,6 +266,7 @@
                         title: resp.data.message
                     })
                     this.clearFormData()
+                    this.clearData()
                     $('#productModal').modal('hide')
                     this.getAllCategories();
                     this.getAllProducts();
@@ -311,8 +315,14 @@
             },
             onChangeGetCategory()
             {
-                this.getCarCategories(this.carId)
+                this.getCarCategories(this.carData.carId)
 
+            },
+            clearData()
+            {
+                this.carData = {
+                    carId: ''
+                }
             }
 
         },

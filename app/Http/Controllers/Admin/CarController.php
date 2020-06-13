@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Cars;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -73,6 +74,7 @@ class CarController extends Controller
     public function destroy($id)
     {
         $car = Cars::find($id);
+        File::delete(public_path() . '/uploads/image/car/' . $car->image);
         $car->delete();
         return response()->json('Success', 200);
     }

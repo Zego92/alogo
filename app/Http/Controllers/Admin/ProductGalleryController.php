@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\ProductGallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -45,6 +46,7 @@ class ProductGalleryController extends Controller
     {
         $result['success'] = true;
         $image = ProductGallery::find($id);
+        File::delete(public_path() . '/uploads/image/productGallery/' . $image->image);
         $image->delete();
         $result['message'] = 'Дополнительное изображение успешно удалено';
         return response()->json($result, 200);

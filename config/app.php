@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        Errorname\VINDecoder\VINDecoderServiceProvider::class,
 
 
         /*

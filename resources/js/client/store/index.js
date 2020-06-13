@@ -5,6 +5,10 @@ import subscribers from "./modules/subscribers";
 import main from "./modules/main";
 import auth from "./modules/auth";
 import feedback from "./modules/feedback";
+import cars from "./modules/cars";
+import category from "./modules/category";
+import products from "./modules/products";
+import search from "./modules/search";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -13,6 +17,10 @@ export default new Vuex.Store({
         subscribers,
         main,
         auth,
-        feedback
+        feedback,
+        cars,
+        category,
+        products,
+        search
     }
 })

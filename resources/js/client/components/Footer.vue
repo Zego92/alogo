@@ -1,7 +1,7 @@
 <template>
     <div>
         <Loader v-if="loader"/>
-        <footer class="page-footer font-small red darken-3 pt-4 animated slideInUp">
+        <footer class="page-footer font-small red darken-3 pt-5 mt-5 fixed-bottom">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-8 mb-2">

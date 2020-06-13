@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8800e473cc7248b8c0b22f16e22def6",
+    "content-hash": "5bbc189c7795bcc7c2581c7a83efc531",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -387,6 +387,43 @@
                 "validator"
             ],
             "time": "2020-02-13T22:36:52+00:00"
+        },
+        {
+            "name": "errorname/vin-decoder",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ErrOrnAmE/vin-decoder.git",
+                "reference": "6db4202c7d42b6082d4cbce753883982097387d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ErrOrnAmE/vin-decoder/zipball/6db4202c7d42b6082d4cbce753883982097387d3",
+                "reference": "6db4202c7d42b6082d4cbce753883982097387d3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Errorname\\VINDecoder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thibaud Courtoison",
+                    "email": "do.not.press.enter@gmail.com",
+                    "homepage": "https://thibaudcourtoison.fr"
+                }
+            ],
+            "description": "VIN (Vehicle Identification Number) decoder using Vincario API",
+            "time": "2017-09-05T17:35:16+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -2196,6 +2233,71 @@
                 "uuid"
             ],
             "time": "2020-03-29T20:13:32+00:00"
+        },
+        {
+            "name": "sunrise/vin",
+            "version": "v1.0.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sunrise-php/vin.git",
+                "reference": "ebee1fedab82f3710e291662fc589567d4f1803e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sunrise-php/vin/zipball/ebee1fedab82f3710e291662fc589567d4f1803e",
+                "reference": "ebee1fedab82f3710e291662fc589567d4f1803e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "phpunit/php-code-coverage": "6.1.4",
+                "phpunit/phpunit": "7.5.13",
+                "sunrise/coding-standard": "1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "data/manufacturers.php",
+                    "data/regions.php",
+                    "data/years.php"
+                ],
+                "psr-4": {
+                    "Sunrise\\Vin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anatoly Fenric",
+                    "email": "anatoly@fenric.ru",
+                    "homepage": "https://anatoly.fenric.ru/"
+                },
+                {
+                    "name": "李昀陞 (Peter)",
+                    "email": "peter279k@gmail.com",
+                    "homepage": "https://github.com/peter279k"
+                },
+                {
+                    "name": "Saud bin Mohammed",
+                    "email": "saud@samaphp.com",
+                    "homepage": "https://github.com/samaphp"
+                }
+            ],
+            "description": "Sunrise // Simple VIN decoder for PHP 7.1+ based on ISO-3779",
+            "homepage": "https://github.com/sunrise-php/vin",
+            "keywords": [
+                "decoder",
+                "fenric",
+                "iso-3779",
+                "sunrise",
+                "vin"
+            ],
+            "time": "2020-05-21T10:41:46+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5733,7 +5835,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "errorname/vin-decoder": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

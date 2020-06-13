@@ -10,11 +10,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <router-link :to="{name: 'Main'}" class="nav-link" href="#">Главная</router-link>
+                    <li class="nav-item">
+                        <router-link :to="{name: 'Main'}" class="nav-link">Главная</router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Каталог продукции</a>
+                        <router-link class="nav-link" :to="{name: 'Cars'}">Каталог продукции</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" :to="{name: 'Search'}">Поиск</router-link>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">О нас</a>
@@ -352,5 +355,11 @@
 <style scoped>
     .modal-c-tabs ul li a.active{
         background-color: #CC0000;
+    }
+    .router-link-exact-active{
+        background-color: rgba(255,255,255,0.2);
+    }
+    .router-link-active{
+        background-color: rgba(255,255,255,0.2);
     }
 </style>

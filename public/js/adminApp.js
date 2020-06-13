@@ -3625,7 +3625,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.formData = {
         name: '',
         keywords: '',
-        parentId: ''
+        parentId: '',
+        carId: '',
+        image: ''
       };
     },
     fileChangeEvent: function fileChangeEvent(e) {
@@ -4938,7 +4940,9 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.use(_ckeditor_ckeditor5_vue__WEBPACK_
         status: '',
         productId: ''
       },
-      carId: ''
+      carData: {
+        carId: ''
+      }
     };
   },
   components: {
@@ -4988,6 +4992,8 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.use(_ckeditor_ckeditor5_vue__WEBPACK_
         });
 
         _this2.clearFormData();
+
+        _this2.clearData();
 
         $('#productModal').modal('hide');
 
@@ -5044,7 +5050,12 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.use(_ckeditor_ckeditor5_vue__WEBPACK_
       });
     },
     onChangeGetCategory: function onChangeGetCategory() {
-      this.getCarCategories(this.carId);
+      this.getCarCategories(this.carData.carId);
+    },
+    clearData: function clearData() {
+      this.carData = {
+        carId: ''
+      };
     }
   }),
   mounted: function mounted() {
@@ -10824,7 +10835,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.custom-file-input[data-v-1f866538]::-webkit-file-upload-button {\n    visibility: hidden;\n}\n.custom-file-input[data-v-1f866538]::before {\n    content: 'Select some files';\n    display: inline-block;\n    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);\n    border: 1px solid #999;\n    border-radius: 3px;\n    padding: 5px 8px;\n    outline: none;\n    white-space: nowrap;\n    -webkit-user-select: none;\n    cursor: pointer;\n    text-shadow: 1px 1px #fff;\n    font-weight: 700;\n    font-size: 10pt;\n}\n.custom-file-input[data-v-1f866538]:hover::before {\n    border-color: black;\n}\n.custom-file-input[data-v-1f866538]:active::before {\n    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);\n}\n.custom-file-label[data-v-1f866538]::after {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 3;\n    height: calc(1.6em + 0.75rem);\n    padding: 0.375rem 0.75rem;\n    line-height: 1.6;\n    color: #495057;\n    /*content: \"Файл\" !important;*/\n    background-color: #e9ecef;\n    border-left: inherit;\n    border-radius: 0 0.25rem 0.25rem 0;\n    display: none !important;\n}\n", ""]);
+exports.push([module.i, "\n.custom-file-input[data-v-1f866538]::-webkit-file-upload-button {\n    visibility: hidden;\n}\n.custom-file-input[data-v-1f866538]::before {\n    content: 'Select some files';\n    display: inline-block;\n    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);\n    border: 1px solid #999;\n    border-radius: 3px;\n    padding: 5px 8px;\n    outline: none;\n    white-space: nowrap;\n    -webkit-user-select: none;\n    cursor: pointer;\n    text-shadow: 1px 1px #fff;\n    font-weight: 700;\n    font-size: 10pt;\n}\n.custom-file-input[data-v-1f866538]:hover::before {\n    border-color: black;\n}\n.custom-file-input[data-v-1f866538]:active::before {\n    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);\n}\n.custom-file-label[data-v-1f866538]::after {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 3;\n    height: calc(1.6em + 0.75rem);\n    padding: 0.375rem 0.75rem;\n    line-height: 1.6;\n    color: #495057;\n    /*content: \"Файл\" !important;*/\n    background-color: #e9ecef;\n    border-left: inherit;\n    border-radius: 0 0.25rem 0.25rem 0;\n    display: none !important;\n}\nimg.card-img-top[data-v-1f866538]{\n    height: 172px;\n    width: 100% !important;\n}\n", ""]);
 
 // exports
 
@@ -71716,8 +71727,8 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: _vm.carId,
-                                    expression: "carId"
+                                    value: _vm.carData.carId,
+                                    expression: "carData.carId"
                                   }
                                 ],
                                 staticClass: "custom-select",
@@ -71736,9 +71747,13 @@ var render = function() {
                                             "_value" in o ? o._value : o.value
                                           return val
                                         })
-                                      _vm.carId = $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
+                                      _vm.$set(
+                                        _vm.carData,
+                                        "carId",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
                                     },
                                     _vm.onChangeGetCategory
                                   ]
