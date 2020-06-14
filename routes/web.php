@@ -39,6 +39,7 @@ Route::resource('/orders', 'Admin\OrderController');
 Route::resource('/admin-order-product', 'Admin\OrderProductController');
 Route::post('/product-update-status', 'Admin\ProductController@updateProductStatus');
 Route::post('/orders-update-status', 'Admin\OrderController@updateOrderStatus');
+Route::post('/get-category-car', 'Admin\CategoryController@getCategoryByCar');
 
 //Client
 Route::resource('/client-banners', 'BannerController');

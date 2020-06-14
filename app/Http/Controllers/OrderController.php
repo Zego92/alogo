@@ -75,7 +75,7 @@ class OrderController extends Controller
             $data = array('name' => $to_name, 'surname' => $to_surname, 'startBody' => $startBody, 'subject' => $subject);
             Mail::send('emails.change-password-mail', $data, function ($message) use ($to_name, $to_surname, $to_email, $subject) {
                 $message->to($to_email, $to_name, $to_surname)->subject($subject);
-                $message->from('alogo@support.com', 'ALOGO | Харьков');
+                $message->from('support@alogo.com.ua', 'ALOGO | Харьков');
             });
 
             $result['success'] = true;

@@ -103,4 +103,13 @@ class CategoryController extends Controller
         }
 
     }
+
+    public function getCategoryByCar(Request $request)
+    {
+//        return $request->carId;
+        $result['success'] = true;
+        $carCategory = Category::where('car_id', $request->carId)->get();
+        $result['carCategory'] = $carCategory;
+        return response()->json($result, 200);
+    }
 }

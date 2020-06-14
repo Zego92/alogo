@@ -12,12 +12,14 @@ function initialState () {
     }
     const carCategories = [];
     const loader = false;
+    const carCategory = [];
     return {
         addCategoryErrors,
         categories,
         categoryCount,
         loader,
-        carCategories
+        carCategories,
+        carCategory
     }
 }
 
@@ -57,6 +59,10 @@ const getters = {
     carCategories(state)
     {
         return state.carCategories
+    },
+    carCategory(state)
+    {
+        return state.carCategory
     }
 
 };
@@ -139,6 +145,24 @@ const actions = {
                     reject(error)
                 })
         })
+    },
+
+    async getCategoryByCar(ctx, data)
+    {
+        return new Promise((resolve, reject) => {
+            axios({
+                url: '/get-category-car',
+                method: 'POST',
+                data: data
+            })
+                .then((resp) => {
+                    ctx.commit('setCarCategory', resp.data.carCategory)
+                    resolve(resp)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
     }
 
 };
@@ -163,6 +187,10 @@ const mutations = {
     setCarCategories(state, carCategories)
     {
         state.carCategories = carCategories
+    },
+    setCarCategory(state, carCategory)
+    {
+        state.carCategory = carCategory
     }
 };
 

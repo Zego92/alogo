@@ -3565,8 +3565,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     Loader: _components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categories', ['loader'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('categories', ['categories', 'addCategoryErrorsParent', 'addCategoryErrorsName', 'addCategoryErrorsKeywords', 'addCategoryErrorsCar', 'addCategoryErrorsImage'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('cars', ['cars'])),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categories', ['getAllCategories', 'addNewCategory', 'deleteCategory'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('cars', ['getAllCars'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categories', ['loader'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('categories', ['categories', 'addCategoryErrorsParent', 'addCategoryErrorsName', 'addCategoryErrorsKeywords', 'addCategoryErrorsCar', 'addCategoryErrorsImage', 'carCategory'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('cars', ['cars'])),
+  methods: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categories', ['getAllCategories', 'addNewCategory', 'deleteCategory', 'getCategoryByCar'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('cars', ['getAllCars'])), {}, {
     onClickAddCategory: function onClickAddCategory() {
       var _this = this;
 
@@ -3641,6 +3641,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
 
       reader.readAsDataURL(image);
+    },
+    onChangeGetCarCategory: function onChangeGetCarCategory() {
+      this.getCategoryByCar({
+        carId: this.formData.carId
+      });
     }
   }),
   mounted: function mounted() {
@@ -68364,26 +68369,29 @@ var render = function() {
                                   staticClass: "custom-select",
                                   attrs: { id: "carBrand" },
                                   on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        _vm.formData,
-                                        "carId",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    }
+                                    change: [
+                                      function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.formData,
+                                          "carId",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      },
+                                      _vm.onChangeGetCarCategory
+                                    ]
                                   }
                                 },
                                 _vm._l(_vm.cars, function(car) {
@@ -68456,7 +68464,7 @@ var render = function() {
                                     _vm._v("Самостоятельная категория")
                                   ]),
                                   _vm._v(" "),
-                                  _vm._l(_vm.categories, function(category) {
+                                  _vm._l(_vm.carCategory, function(category) {
                                     return _c(
                                       "option",
                                       { domProps: { value: category.id } },
@@ -97880,12 +97888,14 @@ function initialState() {
   };
   var carCategories = [];
   var loader = false;
+  var carCategory = [];
   return {
     addCategoryErrors: addCategoryErrors,
     categories: categories,
     categoryCount: categoryCount,
     loader: loader,
-    carCategories: carCategories
+    carCategories: carCategories,
+    carCategory: carCategory
   };
 }
 
@@ -97916,6 +97926,9 @@ var getters = {
   },
   carCategories: function carCategories(state) {
     return state.carCategories;
+  },
+  carCategory: function carCategory(state) {
+    return state.carCategory;
   }
 };
 var actions = {
@@ -98033,6 +98046,33 @@ var actions = {
         }
       }, _callee4);
     }))();
+  },
+  getCategoryByCar: function getCategoryByCar(ctx, data) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              return _context5.abrupt("return", new Promise(function (resolve, reject) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default()({
+                  url: '/get-category-car',
+                  method: 'POST',
+                  data: data
+                }).then(function (resp) {
+                  ctx.commit('setCarCategory', resp.data.carCategory);
+                  resolve(resp);
+                })["catch"](function (error) {
+                  reject(error);
+                });
+              }));
+
+            case 1:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }))();
   }
 };
 var mutations = {
@@ -98050,6 +98090,9 @@ var mutations = {
   },
   setCarCategories: function setCarCategories(state, carCategories) {
     state.carCategories = carCategories;
+  },
+  setCarCategory: function setCarCategory(state, carCategory) {
+    state.carCategory = carCategory;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

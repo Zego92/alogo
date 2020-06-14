@@ -65,7 +65,7 @@
                             <form role="form" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="carBrand">Автопроизводитель</label>
-                                    <select v-model="formData.carId" id="carBrand" class="custom-select">
+                                    <select @change="onChangeGetCarCategory" v-model="formData.carId" id="carBrand" class="custom-select">
                                         <option v-for="car in cars" :value="car.id">{{car.name}}</option>
                                     </select>
                                     <span v-for="error in addCategoryErrorsCar" class="text-danger">{{error}}</span>
@@ -74,7 +74,7 @@
                                     <label for="categoryType">Тип категории</label>
                                     <select v-model="formData.parentId" id="categoryType" class="custom-select">
                                         <option value="0">Самостоятельная категория</option>
-                                        <option v-for="category in categories" :value="category.id">{{category.name}}</option>
+                                        <option v-for="category in carCategory" :value="category.id">{{category.name}}</option>
                                     </select>
                                     <span v-for="error in addCategoryErrorsParent" class="text-danger">{{error}}</span>
                                 </div>
@@ -140,7 +140,8 @@
                     'addCategoryErrorsName',
                     'addCategoryErrorsKeywords',
                     'addCategoryErrorsCar',
-                    'addCategoryErrorsImage'
+                    'addCategoryErrorsImage',
+                    'carCategory'
                 ]),
             ...mapGetters('cars', ['cars'])
         },
@@ -149,7 +150,8 @@
                 [
                     'getAllCategories',
                     'addNewCategory',
-                    'deleteCategory'
+                    'deleteCategory',
+                    'getCategoryByCar'
                 ]),
             ...mapActions('cars', ['getAllCars']),
             onClickAddCategory()
@@ -214,6 +216,10 @@
                 }
                 reader.readAsDataURL(image);
             },
+            onChangeGetCarCategory()
+            {
+                this.getCategoryByCar({carId: this.formData.carId})
+            }
         },
         mounted() {
             this.getAllCategories();
