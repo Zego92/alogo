@@ -34,7 +34,7 @@ class CategoryController extends Controller
         $validation = Validator::make($request->all(), [
             'parentId' => ['required'],
             'carId' => ['required'],
-            'name' => ['required', 'unique:categories'],
+            'name' => ['required'],
             'keywords' => ['required'],
             'image' => ['required']
         ]);

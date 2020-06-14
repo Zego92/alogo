@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('car_id');
             $table->unsignedBigInteger('parent_id');
-            $table->string('name')->unique()->index();
+            $table->string('name')->index();
             $table->string('keywords')->index();
             $table->string('slug')->unique();
             $table->text('image')->nullable();
