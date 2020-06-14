@@ -19,7 +19,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "sunrise/vin": "^1.0"
+        "sunrise/vin": "^1.0",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

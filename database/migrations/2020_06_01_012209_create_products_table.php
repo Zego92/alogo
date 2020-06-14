@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('status');
             $table->string('keywords');
             $table->text('description')->nullable();
-            $table->text('image')->default('no_image.jpg')->nullable();
+            $table->string('image')->nullable()->default('no_image.jpg');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
