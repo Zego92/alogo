@@ -21,22 +21,16 @@ const routes = [
         component: require('../views/Cars').default
     },
     {
-        path: '/category',
-        name: 'Category',
-        meta:{layout: 'main', title: 'Alogo | Каталог товаров'},
-        component: require('../views/Category').default
-    },
-    {
-        path: '/products',
-        name: 'Products',
-        meta:{layout: 'main', title: 'Alogo | Каталог товаров'},
-        component: require('../views/Products').default
-    },
-    {
         path: '/search',
         name: 'Search',
         meta:{layout: 'main', title: 'Alogo | Поиск товаров'},
         component: require('../views/Search').default
+    },
+    {
+        path: '/about',
+        name: 'About',
+        meta:{layout: 'main', title: 'Alogo | О Нас'},
+        component: require('../views/About').default
     },
     {
         path: '/product/:id',

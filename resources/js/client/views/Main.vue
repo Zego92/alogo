@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Loader v-if="loader"/>
         <div id="carousel-example-1z" class="carousel slide carousel-fade mb-5" data-ride="carousel">
             <div class="carousel-inner" role="listbox" >
                 <div class="carousel-item" v-for="(banner,idx) in banners" :class="{ active: idx === 0 }">
@@ -55,9 +56,6 @@
                         </div>
                     </router-link>
                 </div>
-                <div class="col-md-12 align-items-center justify-content-center text-center my-5 mx-auto">
-                    <router-link :to="{name: 'Category'}" class="btn red darken-3 white-text btn-lg">Все группы товаров</router-link>
-                </div>
             </div>
             <div class="row my-5">
                 <div class="col-md-12 my-5">
@@ -76,10 +74,7 @@
                             </div>
                         </div>
                     </router-link>
-                    <button class="btn btn-block red darken-3 white-text"><i class="fas fa-shopping-cart"></i> В корзину</button>
-                </div>
-                <div class="col-md-12 align-items-center justify-content-center text-center my-5 mx-auto">
-                    <router-link :to="{name: 'Products'}" class="btn red darken-3 white-text btn-lg">Все товары</router-link>
+                    <button @click.prevent="addProduct({productId: product.id, name: product.name, price: product.price, quantity: 1})" class="btn btn-block red darken-3 white-text"><i class="fas fa-shopping-cart"></i> В корзину</button>
                 </div>
             </div>
         </div>
@@ -87,29 +82,59 @@
 </template>
 
 <script>
-    import {mapActions, mapGetters} from 'vuex'
+    import {mapActions, mapGetters, mapMutations, mapState} from 'vuex'
+    import Loader from "../components/Loader";
+    import Vue from "vue";
     export default {
         props: [],
         name: "Main",
         data() {
             return {}
         },
-        components: {},
+        components: {Loader},
         computed: {
-            ...mapGetters('banners', ['banners']),
-            ...mapGetters('main', ['cars', 'categories', 'products']),
+            ...mapGetters('main', ['cars', 'categories', 'products', 'banners']),
+            ...mapState('main', ['loader']),
+            orderProducts() {
+                return this.$store.state.orders.orderProducts;
+            },
+            summ() {
+                return this.orderProducts.reduce((acc, item) => {
+                    return acc += item.price * item.quantity;
+                }, 0)
+            },
+            deliverySumm() {
+                if (!+this.formData.delivery || this.summ === 0) {
+                    return 0
+                }
+                return this.summ >= 300 ? 0 : 150;
+            },
+            total() {
+                return this.summ + this.deliverySumm;
+            },
         },
         methods: {
-            ...mapActions('banners', ['getAllBanners']),
-            ...mapActions('main', ['getRandomCars', 'getRandomCategory', 'getRandomProducts'])
-
+            ...mapActions('main', ['getRandomCars', 'getRandomCategory', 'getRandomProducts', 'getAllBanners']),
+            ...mapMutations('orders', ['removeOrder', 'incrementProductQuantity', 'decrementProductQuantity', 'clearOrder']),
+            addProduct(value) {
+                Vue.swal({
+                    toast:true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    icon: 'success',
+                    title: 'Товар добавлен в корзину'
+                })
+                this.$store.commit('orders/addProduct', value);
+            },
 
         },
-        mounted() {
-            this.getAllBanners()
-            this.getRandomCars()
-            this.getRandomCategory()
-            this.getRandomProducts()
+        async mounted() {
+            await this.getAllBanners()
+            await this.getRandomCars()
+            await this.getRandomCategory()
+            await this.getRandomProducts()
         }
     }
 </script>

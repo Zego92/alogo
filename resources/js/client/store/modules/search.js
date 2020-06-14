@@ -80,6 +80,7 @@ const actions = {
 
     async searchByProduct(ctx, data)
     {
+        ctx.commit('setIsLoad', true)
         return new Promise((resolve, reject) => {
             axios({
                 url: '/client-search-product',
@@ -89,9 +90,11 @@ const actions = {
                 .then((resp) => {
                     ctx.commit('setProducts', resp.data.products)
                     resolve(resp)
+                    ctx.commit('setIsLoad', false)
                 })
                 .catch((error) => {
                     reject(error)
+                    ctx.commit('setIsLoad', false)
                 })
         })
     }

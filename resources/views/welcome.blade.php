@@ -25,7 +25,10 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
     <script src="{{ mix('/js/clientApp.js') }}"></script>
         <script>
-            $('.carousel').carousel()
+            $('.carousel').carousel();
+            $(document).ready(function() {
+                $('.treeview-animated').mdbTreeview();
+            });
         </script>
     </body>
 </html>

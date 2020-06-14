@@ -24,19 +24,28 @@
                 </div>
             </div>
         </div>
+        <back-to-top bottom="50px" right="50px">
+            <button type="button" class="btn red darken-3 btn-to-top white-text"><i class="fa fa-chevron-up "></i></button>
+        </back-to-top>
     </div>
 </template>
 
 <script>
     import {mapActions, mapGetters, mapState} from 'vuex'
+    import Vue from 'vue'
     import Loader from "../components/Loader";
+    import BackToTop from 'vue-backtotop'
+    Vue.use(BackToTop)
     export default {
         props: [],
         name: "Cars",
         data() {
             return {}
         },
-        components: {Loader},
+        components: {
+            Loader,
+            BackToTop
+        },
         computed: {
             ...mapGetters('cars', ['cars']),
             ...mapState('cars', ['loader'])
@@ -44,8 +53,8 @@
         methods: {
             ...mapActions('cars', ['getAllCars']),
         },
-        mounted() {
-            this.getAllCars()
+        async mounted() {
+            await this.getAllCars()
         }
     }
 </script>
@@ -55,5 +64,12 @@
         width: 142px;
         height: 109px;
     }
-
+    .btn-to-top {
+        width: 60px;
+        height: 60px;
+        padding: 10px 16px;
+        border-radius: 50%;
+        font-size: 22px;
+        line-height: 22px;
+    }
 </style>

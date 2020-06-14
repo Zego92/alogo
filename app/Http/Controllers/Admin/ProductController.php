@@ -34,7 +34,6 @@ class ProductController extends Controller
             'price' => ['required'],
             'status' => ['required'],
             'description' => ['required'],
-            'image' => ['required'],
         ]);
         if ($validation->fails())
         {
@@ -51,7 +50,7 @@ class ProductController extends Controller
         $productNumber = rand(pow(10, 7 - 1), pow(10, 7) - 1);
         $product = new Product();
         $product->category_id = $request->categoryId;
-        $product->name = $request->name;
+        $product->name = $request->name . '(' . $request->article . ')';
         $product->brand = $request->brand;
         $product->product_number = $productNumber;
         $product->article = $request->article;

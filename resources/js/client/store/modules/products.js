@@ -8,7 +8,7 @@ function initialState () {
     const loader = false;
     return {
         loader,
-        products
+        products,
     }
 }
 

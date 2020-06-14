@@ -68,7 +68,7 @@ class SearchController extends Controller
             $result['error'] = $validation->errors();
             return response()->json($result, 422);
         }
-        $products = Product::with('category.cars')->where('article', '=', $request->article)->get();
+        $products = Product::with('category.cars')->where('article', 'like', '%' . $request->article . '%')->get();
         if ($products->isEmpty())
         {
             $result['success'] = false;

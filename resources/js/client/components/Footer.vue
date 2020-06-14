@@ -1,7 +1,7 @@
 <template>
     <div>
         <Loader v-if="loader"/>
-        <footer class="page-footer font-small red darken-3 pt-5 mt-5 fixed-bottom">
+        <footer id="footer" class="page-footer font-small red darken-3 pt-5 mt-5">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-8 mb-2">
@@ -49,7 +49,9 @@
                 return year
             },
             ...mapState('subscribers', ['loader']),
-            ...mapGetters('subscribers', ['addNewSubscriberErrorsEmail'])
+            ...mapGetters('subscribers', ['addNewSubscriberErrorsEmail']),
+
+
         },
         methods: {
             ...mapActions('subscribers', ['addNewSubscriber']),
@@ -76,9 +78,14 @@
                 this.formData = {
                     email: ''
                 }
+            },
+            addFooterClass()
+            {
+
             }
         },
         mounted() {
+
         }
     }
 </script>

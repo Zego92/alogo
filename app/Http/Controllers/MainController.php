@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cars;
 use App\Category;
+use App\Company;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -54,6 +55,14 @@ class MainController extends Controller
             $products = Product::with('category.cars')->get()->random('12')->toArray();
         }
         $result['products'] = $products;
+        return response()->json($result, 200);
+    }
+
+    public function getCompanyInfo()
+    {
+        $result['success'] = true;
+        $company = Company::all()->toArray();
+        $result['company'] = $company;
         return response()->json($result, 200);
     }
 }

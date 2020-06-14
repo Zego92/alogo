@@ -5,11 +5,15 @@ function initialState () {
     const categories = [];
     const products = [];
     const loader = false;
+    const banners = [];
+    const company = [];
     return {
         cars,
         categories,
         loader,
-        products
+        products,
+        banners,
+        company
     }
 }
 
@@ -29,6 +33,14 @@ const getters = {
     products(state)
     {
         return state.products
+    },
+    banners(state)
+    {
+        return state.banners
+    },
+    company(state)
+    {
+        return state.company
     }
 };
 
@@ -91,6 +103,46 @@ const actions = {
                     ctx.commit('setIsLoad', false)
                 })
         })
+    },
+
+    async getAllBanners(ctx)
+    {
+        ctx.commit('setIsLoad', true)
+        return new Promise((resolve, reject) => {
+            axios({
+                url: '/client-banners',
+                method: 'GET',
+            })
+                .then((resp) => {
+                    ctx.commit('setBanners', resp.data.banners)
+                    resolve(resp)
+                    ctx.commit('setIsLoad', false)
+                })
+                .catch((error) => {
+                    reject(error)
+                    ctx.commit('setIsLoad', false)
+                })
+        })
+    },
+
+    async getCompanyInfo(ctx)
+    {
+        ctx.commit('setIsLoad', true)
+        return new Promise((resolve, reject) => {
+            axios({
+                url: '/get-company-info',
+                method: 'GET'
+            })
+                .then((resp) => {
+                    ctx.commit('setCompany', resp.data.company)
+                    resolve(resp)
+                    ctx.commit('setIsLoad', false)
+                })
+                .catch((error) => {
+                    reject(error)
+                    ctx.commit('setIsLoad', false)
+                })
+        })
     }
 
 };
@@ -111,6 +163,14 @@ const mutations = {
     setProducts(state, products)
     {
         state.products = products
+    },
+    setBanners(state, banners)
+    {
+        state.banners = banners
+    },
+    setCompany(state, company)
+    {
+        state.company = company
     }
 };
 

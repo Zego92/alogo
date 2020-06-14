@@ -10,7 +10,10 @@ class CategoryController extends Controller
 {
     public function index()
     {
-
+        $result['success'] = true;
+        $allCategory = Category::with('cars', 'products')->get()->toArray();
+        $result['allCategory'] = $allCategory;
+        return response()->json($result, 200);
     }
 
     public function create()

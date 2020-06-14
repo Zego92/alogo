@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Loader v-if="loader"/>
         <div class="container my-5">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent">
@@ -83,6 +84,7 @@
 <script>
     import {mapActions, mapState, mapGetters} from 'vuex'
     import Vue from 'vue'
+    import Loader from "../components/Loader";
     export default {
         props: [],
         name: "Search",
@@ -96,17 +98,20 @@
                 }
             }
         },
-        components: {},
+        components: {Loader},
         computed: {
-            ...mapGetters('search', ['getRegion', 'getCountry', 'getManufacturer', 'getModelYear', 'car', 'products'])
+            ...mapGetters('search', ['getRegion', 'getCountry', 'getManufacturer', 'getModelYear', 'car', 'products']),
+            ...mapState('search', ['loader']),
+
         },
         methods: {
             ...mapActions('search', ['searchByVin', 'searchByProduct']),
             onClickSearchByVin()
             {
+                this.$store.commit('search/setProducts', '');
                 this.searchByVin(this.vinData)
-                .then((resp) => {
-
+                .then(() => {
+                    this.clearVinData()
                 })
                 .catch((error) => {
                     Vue.swal({
@@ -123,22 +128,42 @@
 
             onClickSearchByProduct()
             {
-                this.$store.commit('search/car', '')
-                this.$store.commit('search/getRegion', '')
-                this.$store.commit('search/getCountry', '')
-                this.$store.commit('search/getManufacturer', '')
-                this.$store.commit('search/getModelYear', '')
+                this.$store.commit('search/setCar', '')
+                this.$store.commit('search/setRegion', '')
+                this.$store.commit('search/setCountry', '')
+                this.$store.commit('search/setManufacturer', '')
+                this.$store.commit('search/setModelYear', '')
                 this.searchByProduct(this.articleData)
                 .then(() => {
-
+                    this.clearArticleData()
                 })
-                .catch(() => {
-
+                .catch((error) => {
+                    Vue.swal({
+                        toast:true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        icon: 'error',
+                        title: error.response.data.message
+                    })
                 })
+            },
+
+            clearVinData()
+            {
+                this.vinData = {
+                    vin: ''
+                }
+            },
+            clearArticleData()
+            {
+                this.articleData = {
+                    article: ''
+                }
             }
         },
         mounted() {
-            console.log(products)
         }
     }
 </script>

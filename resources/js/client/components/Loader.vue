@@ -30,7 +30,7 @@
         position: fixed;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.7);
         z-index: 99999;
     }
     .spinner-border{

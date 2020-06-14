@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Loader v-if="loader"/>
         <div class="container my-5">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent">
@@ -15,10 +16,7 @@
                     <h3 class="d-block text-center my-5">ГРУППЫ ТОВАРОВ АВТОЗАПЧАСТЕЙ К МАРКЕ <strong class="font-weight-bold text-danger">{{categories.name}}</strong></h3>
                     <hr>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 my-5 align-items-center justify-content-center text-center align-center" v-if="!categories.category.length">
-                    <h4 class="d-block text-center my-5">ПРИНОСИМ СВОИ ИЗВЕНЕНИЯ! ПОСТАВКА ЗАПЧАСТЕЙ ОЖИДАЕТСЯ В БЛИЖАЙШЕЕ ВРЕМЯ. СЛЕДИТЕ ЗА НАШИМИ НОВОСТЯМИ. СПАСИБО!</h4>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-12 my-5 align-items-center justify-content-center text-center align-center" v-else v-for="category in categories.category" :key="category.id">
+                <div class="col-lg-3 col-md-3 col-sm-12 my-5 align-items-center justify-content-center text-center align-center" v-for="category in categories.category" :key="category.id">
                     <router-link :to="{name: 'CategoryProduct', params: {categoryId: category.id, carId: categories.id}}" style="text-decoration: none;">
                         <div class="card hoverable">
                             <div class="card-body p-0 bg-transparent z-depth-2">
@@ -37,15 +35,19 @@
 
 <script>
     import {mapActions, mapGetters, mapState} from 'vuex'
+    import Loader from "../components/Loader";
     export default {
         props: ['carId'],
         name: "CarCategory",
         data() {
             return {}
         },
-        components: {},
+        components: {
+            Loader
+        },
         computed: {
-            ...mapGetters('category', ['categories'])
+            ...mapGetters('category', ['categories']),
+            ...mapState('category', ['loader'])
         },
         methods: {
             ...mapActions('category', ['getAllCategory'])

@@ -20,7 +20,7 @@
                         <router-link class="nav-link" :to="{name: 'Search'}">Поиск</router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">О нас</a>
+                        <router-link class="nav-link":to="{name: 'About'}">О нас</router-link>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto nav-flex-icons">
@@ -30,8 +30,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light">
-                            <i class="fas fa-shopping-cart"></i>
+                        <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#modalCart">
+                            <i class="fas fa-shopping-cart"></i> Всего: {{total}} UAH
                         </a>
                     </li>
                     <li class="nav-item" v-if="this.$store.state.auth.isAuth === true" style="display: none">
@@ -194,12 +194,82 @@
                 </div>
             </div>
         </div>
+        <!-- Modal: modalCart -->
+        <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Корзина</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr v-if="!orderProducts.length">
+                                <span>Корзина Пуста</span>
+                            </tr>
+                            <tr v-else>
+                                <th>#</th>
+                                <th>Название</th>
+                                <th>Цена</th>
+                                <th>Колличество</th>
+                                <th>Удалить</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="(item, index) in orderProducts" :key="index">
+                                <th scope="row">1</th>
+                                <td>{{item.name}}</td>
+                                <td>{{item.price}} UAH</td>
+                                <td><button @click="decrementValue(item)" class="btn btn-sm btn-danger p-1 px-3">-</button>{{item.quantity}}<button @click="incrementProductQuantity(item.productId)" class="btn btn-sm btn-success p-1 px-3">+</button></td>
+                                <td><a @click="removeOrder(item.productId)"><i class="fas fa-times text-danger"></i></a></td>
+                            </tr>
+                            <tr class="total" v-if="!orderProducts.length" style="display: none">
+                                <th scope="row">5</th>
+                                <td>Общая цена</td>
+                                <td></td>
+                                <td>{{summ}} UAH</td>
+                                <td></td>
+                            </tr>
+                            <tr class="total" v-else>
+                                <th scope="row">5</th>
+                                <td>Общая цена</td>
+                                <td></td>
+                                <td>{{summ}} UAH</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="md-form mb-4" v-if="!orderProducts.length" style="display: none">
+                            <i class="fas fa-angle-double-right prefix"></i>
+                            <textarea v-model="formData.comment" id="form21" class="md-textarea form-control" rows="3"></textarea>
+                            <label for="form21">Комментарий к заказу</label>
+                        </div>
+                        <div class="md-form mb-4" v-else>
+                            <i class="fas fa-angle-double-right prefix"></i>
+                            <textarea v-model="formData.comment" id="form21" class="md-textarea form-control" rows="3"></textarea>
+                            <label for="form21">Комментарий к заказу</label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="modal-close" type="button" class="btn btn-success" data-dismiss="modal">Продолжить покупки</button>
+                        <button v-if="!orderProducts.length" @click.prevent="onClickAddOrder" class="btn btn-danger" disabled>Оформить заказа</button>
+                        <button v-else @click.prevent="onClickAddOrder" class="btn btn-danger" >Оформить заказа</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal: modalCart -->
     </div>
 </template>
 
 <script>
     import VueTheMask from 'vue-the-mask'
-    import {mapActions, mapGetters, mapState} from 'vuex'
+    import {mapActions, mapGetters, mapState, mapMutations} from 'vuex'
     import Loader from "./Loader";
     import Vue from 'vue'
     Vue.use(VueTheMask);
@@ -226,7 +296,12 @@
                     email: '',
                     title: '',
                     description: '',
-                }
+                },
+                selectedProduct: null,
+                formData: {
+                    delivery: '',
+                    comment : ''
+                },
             }
         },
         components: {Loader},
@@ -240,8 +315,10 @@
                 'registerErrorsPhone',
                 'registerErrorsAddress',
                 'registerErrorsPassword',
+                'user'
             ]),
             ...mapState('auth', ['loader']),
+            ...mapState('orders', ['loader']),
             ...mapState('feedback', ['loader']),
             ...mapGetters('feedback', [
                 'addFeedbackErrorsName',
@@ -250,10 +327,41 @@
                 'addFeedbackErrorsTitle',
                 'addFeedbackErrorsDescription',
             ]),
+            orderProducts()
+            {
+                return this.$store.state.orders.orderProducts;
+            },
+            summ()
+            {
+                return this.orderProducts.reduce((acc, item) => {
+                    return acc += item.price * item.quantity;
+                }, 0)
+            },
+            deliverySumm()
+            {
+                if (!+this.formData.delivery || this.summ === 0) {
+                    return 0
+                }
+                return this.summ >= 300 ? 0 : 150;
+            },
+            total()
+            {
+                return this.summ + this.deliverySumm;
+            },
+            decrementValue(product)
+            {
+                if (product.quantity === 1) {
+                    this.removeOrder(product.productId);
+                    return;
+                }
+                this.decrementProductQuantity(product.productId)
+            },
         },
         methods: {
             ...mapActions('auth', ['login', 'register']),
             ...mapActions('feedback', ['addNewFeedback']),
+            ...mapActions('orders', ['addNewOrder', 'addNewOrderProducts']),
+            ...mapMutations('orders', ['removeOrder', 'incrementProductQuantity', 'decrementProductQuantity', 'clearOrder']),
             onClickLogin()
             {
                 this.login(this.loginData)
@@ -345,7 +453,41 @@
                     $('#modalContactForm').modal('hide')
                     this.clearFeedBackData()
                 })
-            }
+            },
+            onClickAddOrder()
+            {
+                const data = {
+                    ...this.formData,
+                    total: this.total,
+                    userId: this.user.id
+                }
+                this.addNewOrder(data).then((resp) => {
+                    document.getElementById('modal-close').click();
+                    Vue.swal({
+                        toast:true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        icon: 'success',
+                        title: resp.data.message
+                    })
+                    $('#modalCart').modal('hide')
+                    this.addNewOrderProducts(this.orderProducts).then((resp) => {})
+                })
+                    .catch((error) => {
+                        Vue.swal({
+                            toast:true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            icon: 'error',
+                            title: error.response.data.error
+                        })
+                    })
+            },
+
         },
         mounted() {
         }

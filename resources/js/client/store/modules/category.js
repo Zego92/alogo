@@ -2,10 +2,12 @@ import axios from "axios";
 
 function initialState () {
     const categories = [];
+    const allCategory = []
     const loader = false;
     return {
         loader,
-        categories
+        categories,
+        allCategory
     }
 }
 
@@ -17,6 +19,10 @@ const getters = {
     categories(state)
     {
         return state.categories
+    },
+    allCategory(state)
+    {
+        return state.allCategory
     }
 };
 
@@ -39,6 +45,26 @@ const actions = {
                     ctx.commit('setIsLoad', false)
                 })
         })
+    },
+
+    async getCategories(ctx)
+    {
+        ctx.commit('setIsLoad', true)
+        return new Promise((resolve, reject) => {
+            axios({
+                url: '',
+                method: 'GET'
+            })
+                .then((resp) => {
+                    ctx.commit('setAllCategory', resp.data.allCategory)
+                    resolve(resp)
+                    ctx.commit('setIsLoad', false)
+                })
+                .catch((error) => {
+                    reject(error)
+                    ctx.commit('setIsLoad', false)
+                })
+        })
     }
 };
 
@@ -50,6 +76,10 @@ const mutations = {
     setCategories(state, categories)
     {
         state.categories = categories
+    },
+    setAllCategory(state, allCategory)
+    {
+        state.allCategory = allCategory
     }
 };
 
