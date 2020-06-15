@@ -6,9 +6,15 @@ function initialState () {
         products: []
     };
     const loader = false;
+    const product = {
+        category: {
+            cars: {}
+        }
+    };
     return {
         loader,
         products,
+        product
     }
 }
 
@@ -20,6 +26,10 @@ const getters = {
     products(state)
     {
         return state.products
+    },
+    product(state)
+    {
+        return state.product
     }
 };
 
@@ -42,6 +52,42 @@ const actions = {
                     ctx.commit('setIsLoad', false)
                 })
         })
+    },
+
+    async getProduct(ctx, id)
+    {
+        ctx.commit('setIsLoad', true)
+        return new Promise((resolve, reject) => {
+            axios({
+                url: 'get-product/' + id,
+                method: 'GET'
+            })
+                .then((resp) => {
+                    ctx.commit('setProduct', resp.data.product)
+                    resolve(resp)
+                    ctx.commit('setIsLoad', false)
+                })
+                .catch((error) => {
+                    reject(error)
+                    ctx.commit('setIsLoad', false)
+                })
+        })
+    },
+
+    async getRandomProductsForProduct(ctx, id)
+    {
+        return new Promise((resolve, reject) => {
+            axios({
+                url: '/get-product-random/' + id,
+                method: 'GET'
+            })
+                .then((resp) => {
+                    resolve(resp)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
     }
 };
 
@@ -53,6 +99,10 @@ const mutations = {
     setProducts(state, products)
     {
         state.products = products
+    },
+    setProduct(state, product)
+    {
+        state.product = product
     }
 };
 

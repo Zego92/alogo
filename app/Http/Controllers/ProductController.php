@@ -45,4 +45,20 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function getProduct($id)
+    {
+        $result['success'] = true;
+        $product = Product::with('category.cars')->find($id);
+        $result['product'] = $product;
+        return response()->json($result, 200);
+    }
+
+    public function getRandomProductsForProduct($id)
+    {
+        $result['success'] = true;
+        $randomProduct = Product::with('category.cars')->where('category_id', $id)->get()->random('3');
+        $result['randomProduct'] = $randomProduct;
+        return response()->json($result, 200);
+    }
 }

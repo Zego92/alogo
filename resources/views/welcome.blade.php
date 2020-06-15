@@ -29,6 +29,7 @@
             $(document).ready(function() {
                 $('.treeview-animated').mdbTreeview();
             });
+
         </script>
     </body>
 </html>

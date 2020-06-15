@@ -54,6 +54,8 @@ Route::get('/get-random-cars', 'MainController@getRandomCars');
 Route::get('/get-random-category', 'MainController@getRandomCategory');
 Route::get('/get-random-products', 'MainController@getRandomProducts');
 Route::get('/get-company-info', 'MainController@getCompanyInfo');
+Route::get('/get-product/{id}', 'ProductController@getProduct');
+Route::get('/get-product-random/{id}', 'ProductController@getRandomProductsForProduct');
 Route::post('/client-login', 'AuthController@login');
 Route::post('/client-register', 'AuthController@register');
 Route::post('/client-search-vin', 'SearchController@searchByVin');

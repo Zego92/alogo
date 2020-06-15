@@ -33,7 +33,7 @@ const routes = [
         component: require('../views/About').default
     },
     {
-        path: '/product/:id',
+        path: '/cars/:carId/category/:categoryId/products/product/:id',
         name: 'Product',
         meta:{layout: 'main', title: 'Alogo | Каталог товаров'},
         component: require('../views/Product').default,
