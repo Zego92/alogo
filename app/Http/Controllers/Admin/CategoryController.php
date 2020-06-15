@@ -54,7 +54,7 @@ class CategoryController extends Controller
         $category->car_id = $request->carId;
         $category->name = $request->name;
         $category->keywords = $request->keywords;
-        $category->slug = $slug . date('Y-m-d-h-m-s');
+        $category->slug = $slug . date('Y-m-d-h-m-s-v');
         $category->image = $imageName;
         $category->save();
         if ($category)
